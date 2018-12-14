@@ -4,24 +4,30 @@
 <meta charset="UTF-8">
 <script>
 function controller(){
-  validateForm();
-  validateEmail();
-  validateNumeric();
-  validateNumericAndLength();
-  validateAlpha();
-  validateAlphaAndLength();
-  validateThreeWords();
-  validatePW();
+    
+    var formValidation = validateForm();
+    var emailValidation = validateEmail();
+    var NumericValidation = validateNumeric();
+    var NumAndLenValidation = validateNumericAndLength();
+    var AlphaValidation = validateAlpha();
+    var AlphaAndLenValidation = validateAlphaAndLength();
+    var ThreeWordValidation = validateThreeWords();
+    var PwValidation = validatePW();
+    
+    if(!(formValidation && emailValidation && NumericValidation && NumAndLenValidation && AlphaValidation && AlphaAndLenValidation && ThreeWordValidation && PwValidation)){ /*if any of returns are not true return false */      return false;
+    }
+    
 }
 function alertNull(className){
   var x = document.getElementsByClassName(className)[0];
   x.style.color = "red";
   x.innerHTML = "You must fill here!";
+    return false;
 }
 function validateForm() {
   var x = document.querySelector("#name").value;
   if (x == "") {
-    alertNull("name");
+    return alertNull("name");
   }
 }
 
@@ -36,9 +42,9 @@ function validateEmail() {
 
   } 
    if (x == "") {
-    alertNull("email");
+    return alertNull("email");
   }
-
+    return false;
 }
 
 function validateNumeric() {
@@ -52,9 +58,9 @@ function validateNumeric() {
 
   }
   if (x == "") {
-    alertNull("sayisal");
+    return alertNull("sayisal");
   }
-
+return false;
 }
 
 function validateNumericAndLength() {
@@ -67,9 +73,9 @@ function validateNumericAndLength() {
 
   }
   if (x == "") {
-    alertNull("basamakli");
+    return alertNull("basamakli");
   }
-
+return false;
 }
 
 function validateAlpha() {
@@ -83,9 +89,9 @@ if (!x.match(pattern)) {
 
   }
   if (x == "") {
-    alertNull("alfa");
+    return alertNull("alfa");
   }
-
+    return false;
 }
 
 function validateAlphaAndLength() {
@@ -99,15 +105,15 @@ if (!x.match(pattern) || (x.length > 30)) {
 
   }
   if (x == "") {
-    alertNull("max30");
+    return alertNull("max30");
   }
-
+    return false;
 }
 
 function validateThreeWords() {
   var x = document.querySelector("#uckelime").value;
   
-  x = x.trim(); //Başındaki ve sonundaki gereksiz boşlukları silmek için
+  x = x.trim(); //Removes leading and trailing spaces.
   var spaceCounter = 0;
   for (var i = 0; i < x.length; i++) {
     if(x[i] === " "){
@@ -121,9 +127,9 @@ function validateThreeWords() {
 
   }
   if (x == "") {
-    alertNull("uckelime");
+    return alertNull("uckelime");
   }
-
+      return false;
 }
 
 function validatePW() {
@@ -139,15 +145,15 @@ if (!x.match(pattern)) {
   }
 
   if (x == "") {
-    alertNull("password");
+    return alertNull("password");
   }
-
+return false;
 }
 </script>
 </head>
 <body>
 
-<form name="myForm" action="/action_page.php" onsubmit="controller()" method="post">
+<form name="myForm" action="/action_page.php" onsubmit="return controller()" method="post">
   Aşağıdaki hiçbir input boş olmamalı: <br>
   
 
