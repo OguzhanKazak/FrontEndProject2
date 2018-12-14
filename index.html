@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script>
+function controller(){
+  validateForm();
+  validateEmail();
+  validateNumeric();
+  validateNumericAndLength();
+  validateAlpha();
+  validateAlphaAndLength();
+  validateThreeWords();
+  validatePW();
+}
+function alertNull(className){
+  var x = document.getElementsByClassName(className)[0];
+  x.style.color = "red";
+  x.innerHTML = "You must fill here!";
+}
+function validateForm() {
+  var x = document.querySelector("#name").value;
+  if (x == "") {
+    alertNull("name");
+  }
+}
+
+function validateEmail() {
+  var x = document.querySelector("#email").value;
+  var pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+
+  if (!x.match(pattern)) {
+    var alert = document.getElementsByClassName("email")[0];
+    alert.style.color =  "red";
+    alert.innerHTML =  "Your E-mail is not valid!";
+
+  } 
+   if (x == "") {
+    alertNull("email");
+  }
+
+}
+
+function validateNumeric() {
+  var x = document.querySelector("#sayisal").value;
+  
+  if (isNaN(x)) {
+    var alert = document.getElementsByClassName("sayisal")[0];
+    alert.style.color =  "red";
+    alert.innerHTML =  "Only numeric values!";
+
+
+  }
+  if (x == "") {
+    alertNull("sayisal");
+  }
+
+}
+
+function validateNumericAndLength() {
+  var x = document.querySelector("#basamakli").value;
+  
+  if (isNaN(x) || (x.length != 12)) {
+    var alert = document.getElementsByClassName("basamakli")[0];
+    alert.style.color =  "red";
+    alert.innerHTML =  "Only numeric and 12 digit values!";
+
+  }
+  if (x == "") {
+    alertNull("basamakli");
+  }
+
+}
+
+function validateAlpha() {
+var x = document.querySelector("#alfa").value;
+
+var pattern = /^[a-zA-Z]+$/;
+if (!x.match(pattern)) {
+  var alert = document.getElementsByClassName("alfa")[0];
+  alert.style.color =  "red";
+  alert.innerHTML =  "Only alpha values!";
+
+  }
+  if (x == "") {
+    alertNull("alfa");
+  }
+
+}
+
+function validateAlphaAndLength() {
+var x = document.querySelector("#max30").value;
+var pattern = /^[a-zA-Z]+$/;
+
+if (!x.match(pattern) || (x.length > 30)) {
+  var alert = document.getElementsByClassName("max30")[0];
+  alert.style.color =  "red";
+  alert.innerHTML =  "Only alpha values, max length is 30!";
+
+  }
+  if (x == "") {
+    alertNull("max30");
+  }
+
+}
+
+function validateThreeWords() {
+  var x = document.querySelector("#uckelime").value;
+  
+  x = x.trim(); //Başındaki ve sonundaki gereksiz boşlukları silmek için
+  var spaceCounter = 0;
+  for (var i = 0; i < x.length; i++) {
+    if(x[i] === " "){
+      spaceCounter++;
+      }
+    }
+  if(spaceCounter != 2){
+    var alert = document.getElementsByClassName("uckelime")[0];
+    alert.style.color =  "red";
+    alert.innerHTML =  "Input must be 3 words!";
+
+  }
+  if (x == "") {
+    alertNull("uckelime");
+  }
+
+}
+
+function validatePW() {
+var x = document.querySelector("#password").value;
+
+var pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^\&*\)\(+=._-])[0-9a-zA-Z!@#\$%\^\&*\)\(+=._-]{8,}$/;
+
+if (!x.match(pattern)) {
+  var alert = document.getElementsByClassName("password")[0];
+  alert.style.color =  "red";
+  alert.innerHTML =  "Input is not valid!";
+
+  }
+
+  if (x == "") {
+    alertNull("password");
+  }
+
+}
+</script>
+</head>
+<body>
+
+<form name="myForm" action="/action_page.php" onsubmit="controller()" method="post">
+  Aşağıdaki hiçbir input boş olmamalı: <br>
+  
+
+  <table style="width:60%">
+  <tr>
+    <td>Boş olmamalı: </td>
+    <td><input type="text" id="name"> </td>
+    <td class = "name"> </td>
+    
+  </tr>
+  <tr>
+    <td>E-mail (Kurallara uygun email): </td>
+    <td><input type="text" id="email"></td>
+    <td class="email"> </td>
+    
+  </tr>
+  <tr>
+    <td>Sadece sayısal: </td>
+    <td><input type="text" id="sayisal"></td>
+    <td class="sayisal"> </td>
+  </tr>
+  <tr>
+    <td>Sadece sayısal olan ve 12 basamak uzunluğundaki sayi: </td>
+    <td><input type="text" id="basamakli"></td>
+    <td class="basamakli"> </td>
+  </tr>
+  <tr>
+    <td>Sadece harf (a..z veya A..Z): </td>
+    <td><input type="text" id="alfa"></td>
+    <td class = "alfa"></td>
+  </tr>
+  <tr>
+    <td>Sadece harf ve en fazla 30 uzunlukta olan string: </td>
+    <td><input type="text" id="max30"></td>
+    <td class = "max30"></td>
+  </tr>
+  <tr>
+    <td>3 kelimeden oluşan string: </td>
+    <td><input type="text" id="uckelime"></td>
+    <td class = "uckelime"></td>
+  </tr>
+  <tr>
+    <td>En az 1 büyük harf, en az 1 küçük harf, en az bir rakam ve en az 1 noktalama işareti içeren ve en az 8 uzunluğunda olan metin: </td>
+    <td><input type="text" id="password"></td>
+    <td class = "password"></td>
+  </tr>
+  
+
+</table>
+
+<br>
+  <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
